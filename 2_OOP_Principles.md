@@ -6,16 +6,16 @@ Nesne Yönelimli Programlamanın temelini oluşturan ve yazılım mimarisini şe
 
 ---
 
-## 🧬 2.1 Abstraction (Soyutlama)
+##  2.1 Abstraction (Soyutlama)
 
-### 💡 Teorik Açıklama
+###  Teorik Açıklama
 Soyutlama (Abstraction), önemli özelliklere odaklanmak için ayrıntıları göz ardı etme sürecidir. Bu prensibin asıl amacı, her sınıfın kendine ait özelliklerini belirlemek ve o sınıfı daha anlaşılır hâle getirmektir. Temel ve kritik özelliklere odaklanmayı sağlayarak, o anki probleme çözüm üretmek için gereksiz olan detayları bir kenara bırakır.
 
-### 🎯 Gerçek Hayat Analojisi
+###  Gerçek Hayat Analojisi
 * **Kutu Örneği:** Bir sistem tasarlanırken "Kutu" sınıfı için uzunluk, genişlik ve yükseklik gibi boyutlar önemli özellikler olarak belirlenir. Ancak, kutunun yapıldığı malzeme veya rengi gibi ayrıntılar o anki ihtiyaca yönelik değilse göz ardı edilebilir.
 * **Araba Örneği:** "Araba" sınıfı ile ilgilenirken yalnızca kullanım ve performansla ilgili özelliklere odaklanılır. Aracın maksimum hızı, yakıt kapasitesi ve markası gibi temel detaylar önemli kabul edilirken ; iç döşeme rengi, radyo markası veya cam tipi gibi gereksiz detaylar göz ardı edilir.
 
-### 💻 Kod Örneği
+###  Kod Örneği
 
 Aşağıdaki Python kodunda, dokümandaki çalışma sorularında istenildiği gibi `Tasit` adında soyut (abstract) bir sınıf kurgulanmış ve sadece problem için gerekli olan özelliklere odaklanılmıştır.
 
