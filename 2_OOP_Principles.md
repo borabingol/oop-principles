@@ -72,7 +72,7 @@ benim_arabam = Araba(marka="Toyota", maksimum_hiz=180, yakit_kapasitesi=50)
 benim_arabam.hizlan(60)
 benim_arabam.hizlan(150) # Maksimum hızı aşmaya çalışıyoruz
 benim_arabam.yavasla(40)
----
+```
 
 ## 2.2 Encapsulation (Kapsülleme)
 ### Teorik Açıklama
