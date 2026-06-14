@@ -125,4 +125,66 @@ print(f"Öğrenci: {ogrenci_2.get_isim()}, Notu: {ogrenci_2.get_not()}")
 # print(ogrenci_1.__not) # Yorum satırından çıkarılırsa hata fırlatır!
 ```
 
+---
 
+## 2.3 Polymorphism (Çok-şekillilik)
+
+### Teorik Açıklama
+Çok-şekillilik (Polymorphism), nesne yönelimli programlamanın en temel yapılarından biridir ve bir nesnenin ya da bir metodun farklı durumlarda veya farklı sınıflarda tamamen kendine özgü şekillerde davranabilmesi özelliğidir. Kelime anlamı olarak "çok biçimlilik" anlamına gelir. Bu prensip sayesinde, aynı isim altında tanımlanmış ortak bir eylem (metot), farklı sınıflarda o sınıfın iç mantığına ve kurallarına göre bambaşka biçimlerde işlenebilir. Yazılım mimarisinde kodun esnekliğini, modülerliğini ve genişletilebilirliğini artırarak; ortak bir çatı altında toplanan farklı nesnelerin birbirlerinin yerine kullanılabilmesine olanak tanır.
+
+### Gerçek Hayat Analojisi
+* **Çalışan Türleri Örneği:** Bir şirkette görev yapan tüm personeller için ortak bir Calisan tanımı yapılabilir ve hepsinin gerçekleştirmesi gereken bir maas_hesapla() eylemi bulunur. Ancak bu eylemin işleyiş şekli personelin türüne göre değişir: Bir "Müdür" için maaş hesaplanırken temel ücrete performans primleri eklenir; bir "Muhasebeci" için farklı kalemler dikkate alınır; bir "Stajyer" için ise sadece çalıştığı gün sayısı baz alınır. Tetiklenen komut hepsinde aynıdır (maas_hesapla()), fakat ortaya çıkan davranış her çalışanın kendi kimliğine göre şekillenir.
+
+### Kod Örneği
+
+Aşağıdaki Python kodunda, gerçek hayat analojisindeki "Çalışan" senaryosu modellenerek çok-şekillilik (polymorphism) prensibi uygulanmıştır. Tüm alt sınıflar aynı metot ismini (maas_hesapla) ortak bir çatı altında kullanır ancak her nesne çağrıldığında kendi sınıfına özgü bir çıktı üretir.
+
+```python
+# Temel sınıf (Base Class)
+# Ortak ata sınıf (Base Class)
+class Calisan:
+    def __init__(self, ad, temel_maas):
+        self.ad = ad
+        self.temel_maas = temel_maas
+
+    def maas_hesapla(self):
+        # Ortak metot tanımı, alt sınıflar tarafından özelleştirilecek
+        pass
+
+# Calisan sınıfından türetilen alt sınıflar
+class Mudur(Calisan):
+    def __init__(self, ad, temel_maas, prim):
+        super().__init__(ad, temel_maas)
+        self.prim = prim
+
+    def maas_hesapla(self):
+        # Müdür sınıfına özgü maaş hesaplama davranışı
+        toplam_maas = self.temel_maas + self.prim
+        print(f"Müdür {self.ad} için maaş hesaplandı (Temel Maaş + Prim): {toplam_maas} TL")
+
+class Stajyer(Calisan):
+    def __init__(self, ad, temel_maas, calisilan_gun):
+        super().__init__(ad, temel_maas)
+        self.calisilan_gun = calisilan_gun
+
+    def maas_hesapla(self):
+        # Stajyer sınıfına özgü maaş hesaplama davranışı
+        toplam_maas = (self.temel_maas / 22) * self.calisilan_gun
+        print(f"Stajyer {self.ad} için maaş hesaplandı ({self.calisilan_gun} gün üzerinden): {int(toplam_maas)} TL")
+
+# Çok-şekillilik (Polymorphism) özelliğini kullanan ortak fonksiyon
+def maas_bordrosu_yazdir(calisan_nesnesi):
+    # Bu fonksiyon, kendisine gelen nesnenin tam olarak hangi alt sınıftan olduğunu bilmek zorunda değildir.
+    # Sadece onun bir 'Calisan' olduğunu ve 'maas_hesapla' metoduna sahip olduğunu bilir.
+    # Metot çağrıldığında, nesne kendi sınıfına uygun olan şekliyle (çok-şekilli) yanıt verir.
+    calisan_nesnesi.maas_hesapla()
+
+# Nesnelerin oluşturulması
+mudur_ahmet = Mudur(ad="Ahmet", temel_maas=50000, prim=15000)
+stajyer_mehmet = Stajyer(ad="Mehmet", temel_maas=20000, calisilan_gun=15)
+
+# Çok-şekillilik davranışı test ediliyor
+print("--- Şirket Maaş Ödeme Dönemi ---")
+maas_bordrosu_yazdir(mudur_ahmet)     # Çıktı: Müdür sınıfının özelleştirilmiş davranışı
+maas_bordrosu_yazdir(stajyer_mehmet)  # Çıktı: Stajyer sınıfının özelleştirilmiş davranışı
+```
