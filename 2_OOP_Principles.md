@@ -188,3 +188,68 @@ print("--- Şirket Maaş Ödeme Dönemi ---")
 maas_bordrosu_yazdir(mudur_ahmet)     # Çıktı: Müdür sınıfının özelleştirilmiş davranışı
 maas_bordrosu_yazdir(stajyer_mehmet)  # Çıktı: Stajyer sınıfının özelleştirilmiş davranışı
 ```
+---
+
+## 2.4 Inheritance (Kalıtım)
+
+###  Teorik Açıklama
+Kalıtım (Inheritance), bir sınıfın (temel/ana sınıf) sahip olduğu özelliklerin (değişkenlerin) ve davranışların (metotların) başka sınıflar (alt/yavru sınıflar) tarafından miras alınarak kullanılabilmesini sağlayan Nesne Yönelimli Programlama prensibidir. Bu yapı sayesinde alt sınıflar, üst sınıftaki kodları tekrar yazmak zorunda kalmazlar. Kalıtım; kod tekrarını önler, yazılımın bakımını ve güncellenmesini kolaylaştırır ve yeni sınıfların çok daha hızlı bir şekilde geliştirilmesine olanak tanır. Alt sınıf, temel sınıfın ortak özelliklerini kullanabilmenin yanı sıra, kendi özel üyelerini (yeni değişken ve metotlar) barındırarak yapıyı genişletebilir.
+
+###  Gerçek Hayat Analojisi
+* **İnsan - Canlı İlişkisi:** Bir "Canlı" sınıfı düşünelim; bu sınıfın tüm canlılarda ortak olan `nefes_al()` veya `beslen()` gibi temel yetenekleri (metotları) vardır. Bir "İnsan" veya "Hayvan" sınıfı oluşturduğumuzda, bu sınıflar "Canlı" sınıfından türetilir (miras alır). Böylece `nefes_al()` eylemini İnsan sınıfı için en baştan yazmamıza gerek kalmaz; bu yetenek zaten genetiğinde (miras aldığı temel sınıfta) vardır.
+* **Taşıtlar Örneği:** Bir "Taşıt" sınıfımız olsun ve bu sınıfın "tekerlek sayısı", "marka" gibi özellikleri bulunsun. "Otomobil", "Kamyon" ve "Motosiklet" gibi yeni nesne şablonları yaratırken, taşıtlara ait bu ortak özellikleri tekrar tekrar tanımlamayız. Doğrudan "Taşıt" sınıfını miras alır ve sadece kendilerine has özelliklerini (örneğin Otomobil için 4 tekerlek, Motosiklet için 2 tekerlek) belirterek sistemi esnek bir şekilde genişletiriz.
+
+###  Kod Örneği
+
+Aşağıdaki Python kodunda, gerçek hayat analojisindeki "Taşıt" senaryosu modellenmiştir. Ortak özellikler (`marka`, `tekerlek_sayisi` ve `bilgileri_goster`) temel sınıfta tanımlanmış ve alt sınıflar tarafından miras alınarak kullanılmıştır.
+
+```python
+# Temel sınıf (Base Class)
+class Tasit:
+    def __init__(self, marka, tekerlek_sayisi):
+        self.marka = marka
+        self.tekerlek_sayisi = tekerlek_sayisi
+
+    def bilgileri_goster(self):
+        # Tüm taşıtlar için ortak olan davranış (metot)
+        print(f"Marka: {self.marka}, Tekerlek Sayısı: {self.tekerlek_sayisi}")
+
+# Tasit sınıfından türetilen (miras alan) alt sınıf (Derived Class)
+class Otomobil(Tasit):
+    def __init__(self, marka, kapi_sayisi):
+        # Üst sınıfın (Tasit) yapıcı metodunu (constructor) çağırıyoruz
+        # Otomobiller standart 4 tekerlekli olduğu için bu değeri sabit gönderiyoruz
+        super().__init__(marka, tekerlek_sayisi=4)
+        
+        # Alt sınıfa özgü yeni bir özellik ekliyoruz
+        self.kapi_sayisi = kapi_sayisi
+
+    def otomobil_bilgisi(self):
+        # Hem miras alınan özellikleri (marka, tekerlek_sayisi) hem de kendi özelliğini kullanır
+        print(f"{self.marka} markalı otomobilin {self.kapi_sayisi} kapısı ve {self.tekerlek_sayisi} tekerleği vardır.")
+
+# Başka bir alt sınıf örneği
+class Motosiklet(Tasit):
+    def __init__(self, marka, sepetli_mi):
+        # Üst sınıfın yapıcı metodu çağrılıyor, motosiklet için 2 tekerlek sabitleniyor
+        super().__init__(marka, tekerlek_sayisi=2)
+        
+        self.sepetli_mi = sepetli_mi
+
+    def motor_bilgisi(self):
+        sepet_durumu = "sepetli" if self.sepetli_mi else "sepetsiz"
+        print(f"{self.marka} markalı motosiklet {sepet_durumu}dir ve {self.tekerlek_sayisi} tekerleği vardır.")
+
+# Nesnelerin oluşturulması
+bmw_oto = Otomobil(marka="BMW", kapi_sayisi=4)
+yamaha_motor = Motosiklet(marka="Yamaha", sepetli_mi=False)
+
+print("--- Miras Alınan Ortak Metotun Kullanımı ---")
+# bilgileri_goster() metodu alt sınıflarda yazılmamasına rağmen kalıtım sayesinde kullanılabilir
+bmw_oto.bilgileri_goster()     
+yamaha_motor.bilgileri_goster() 
+
+print("\n--- Alt Sınıflara Özgü Metotların Kullanımı ---")
+bmw_oto.otomobil_bilgisi()
+yamaha_motor.motor_bilgisi()
+```
