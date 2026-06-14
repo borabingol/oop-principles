@@ -16,9 +16,3 @@ Bu depo, Nesne Yönelimli Programlama (OOP) prensiplerini, modern yazılım tasa
 * Inheritance (Kalıtım)
 * Polymorphism (Çok Biçimlilik)
 
-### 3. [SOLID Prensipleri](./3_SOLID.md)
-* S - Single Responsibility
-* O - Open/Closed
-* L - Liskov Substitution
-* I - Interface Segregation
-* D - Dependency Inversion
