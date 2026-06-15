@@ -16,3 +16,16 @@ Bu depo, Nesne Yönelimli Programlama (OOP) prensiplerini, modern yazılım tasa
 * Inheritance (Kalıtım)
 * Polymorphism (Çok Biçimlilik)
 
+---
+
+---
+
+## Kaynakça
+
+Bu depodaki teorik anlatımlar, kod örnekleri ve dökümantasyon yapısı, **Tekirdağ Namık Kemal Üniversitesi Bilgisayar Mühendisliği Bölümü** bünyesinde verilen **Nesneye Yönelik Programlama** dersi kaynak alınarak hazırlanmıştır.
+
+* **Ders Sorumlusu:** Prof. Dr. Erdinç UZUN
+* **Ders Materyalleri:** [NKU ADYS](https://adys.nku.edu.tr/) & [Prof. Dr. Erdinç Uzun GitHub](https://github.com/erdincuzun)
+* **Yararlanılan Temel Kaynaklar:** 
+  * Ahmet Kaymaz, *C# Programlama Dili ve Yazılım Tasarımı*
+  * Dr. M. Erhan Sarıdoğan, *C++ ve Nesneye Yönelik Programlama*
